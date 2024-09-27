@@ -13,7 +13,7 @@ print("CUDA_VISIBLE_DEVICES: ", os.environ["CUDA_VISIBLE_DEVICES"])
 
 models_df = pd.read_csv("configs/models.csv", index_col=None)
 # models_df = pd.read_csv("configs/models_nonscaling.csv", index_col=None)
-benchmarks_df = pd.read_csv("configs/benchmarks_nlp.csv", index_col=None)
+benchmarks_df = pd.read_csv("configs/benchmarks.csv", index_col=None)
 # benchmarks_df = pd.read_csv("configs/benchmarks_code.csv", index_col=None)
 
 # Shuffle models and benchmarks.
