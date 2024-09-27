@@ -41,6 +41,6 @@ export PYTHONPATH=.
 python -u queue_evals.py 2 # Change this to whatever GPU you want to use.
 ```
 
-I recommend running multiple sessions in parallel.
+I recommend running multiple `krbtmux` sessions in parallel.
 
 The per-sample outputs will be written to disk in a directory called `eval_results`.
