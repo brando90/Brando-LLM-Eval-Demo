@@ -5,6 +5,8 @@ import random
 import subprocess
 import sys
 
+from pdb import set_trace as st
+
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 gpu_ids = sys.argv[1]
 os.environ["CUDA_VISIBLE_DEVICES"] = str(gpu_ids)
@@ -12,15 +14,17 @@ print("CUDA_VISIBLE_DEVICES: ", os.environ["CUDA_VISIBLE_DEVICES"])
 
 
 models_df = pd.read_csv("configs/models.csv", index_col=None)
-# models_df = pd.read_csv("configs/models_nonscaling.csv", index_col=None)
 benchmarks_df = pd.read_csv("configs/benchmarks.csv", index_col=None)
-# benchmarks_df = pd.read_csv("configs/benchmarks_code.csv", index_col=None)
+
+# models_df = pd.read_csv("configs/debug/models_debug.csv", index_col=None)
+# benchmarks_df = pd.read_csv("configs/debug/benchmarks_debug.csv", index_col=None)
 
 # Shuffle models and benchmarks.
 models_df = models_df.sample(frac=1)
 benchmarks_df = benchmarks_df.sample(frac=1)
 
-results_dir = "eval_results"
+results_dir = os.path.expanduser("~/data/beyond_scale/eval_results")
+print(f'Results wrriten to: {results_dir}')
 
 for model_idx, model_row in models_df.iterrows():
     # Compute and (optionally) create the model output directory.
@@ -41,9 +45,7 @@ for model_idx, model_row in models_df.iterrows():
                 benchmark_and_optional_task += f"_{task}"
 
             # Compute and (optionally) create the task output directory.
-            model_task_output_path = os.path.join(
-                results_dir, model_nickname, benchmark_and_optional_task
-            )
+            model_task_output_path = os.path.join(results_dir, model_nickname, benchmark_and_optional_task)
             os.makedirs(model_task_output_path, exist_ok=True)
 
             # Skip if results.json exists

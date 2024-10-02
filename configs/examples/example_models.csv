@@ -1,0 +1,3 @@
+Model Family,Model Nickname,HuggingFace Path,HuggingFace Revision
+Llama 2,Llama2_7B_1.92T,meta-llama/Llama-2-7b-hf
+Pythia,Pythia_12B_300B,EleutherAI/pythia-12b,step143000
