@@ -32,6 +32,7 @@ rm -rf /afs/cs.stanford.edu/u/<your username>/.cache
 Clone and install the evaluation harness:
 
 ```bash
+cd ~
 git clone --depth 1 https://github.com/EleutherAI/lm-evaluation-harness
 cd lm-evaluation-harness && pip install -e . && cd ..
 ```
