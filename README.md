@@ -5,19 +5,27 @@
 
 (Optional) Update conda:
 
-`conda update -n base -c defaults conda -y`
+```bash
+conda update -n base -c defaults conda -y
+```
 
 Create a conda environment with the required packages:
 
-`conda create -n eleuther_lm_eval_harness_20240927 python=3.11`
+```bash
+conda create -n eleuther_lm_eval_harness_20240927 python=3.11
+```
 
 To activate the environment:
 
-`conda activate eleuther_lm_eval_harness_20240927`
+```bash
+conda activate eleuther_lm_eval_harness_20240927
+```
 
 If running on SNAP, make sure you have sufficient disk space in `/afs/cs.stanford.edu/u/<your username>/`:
 
-`rm -rf /afs/cs.stanford.edu/u/<your username>/.cache`
+```bash
+rm -rf /afs/cs.stanford.edu/u/<your username>/.cache
+```
 
 Clone and install the evaluation harness:
 
@@ -37,10 +45,20 @@ To queue running evals, create a new `krbtmux` session, reauthenticate, and run 
 from the project directory:
 
 ```bash
+# - Open kerberos tmux in ampere cluster & reauth
+krbtmux
+reauth
+
+# - Activate right env and run experiment
+conda activate eleuther_lm_eval_harness_20240927
+cd ~/beyond-scale-language-data-diversity/Brando-LLM-Eval-Demo
 export PYTHONPATH=.
-python -u queue_evals.py 2 # Change this to whatever GPU you want to use.
+# change gpu if needed
+export CUDA_VISIBLE_DEVICES=6
+# Run experiment
+python -u queue_evals.py ${CUDA_VISIBLE_DEVICES} 
 ```
 
 I recommend running multiple `krbtmux` sessions in parallel.
 
-The per-sample outputs will be written to disk in a directory called `eval_results`.
+The per-sample outputs will be written to disk in a directory called `eval_results` (see `queue_evals.py` for location).
