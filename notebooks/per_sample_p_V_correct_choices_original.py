@@ -32,8 +32,8 @@ model_name_folder_2_div_coeff = {
     "GPT2_345M_2.2B_PubMedAbs": 0.168,
     "GPT2_345M_2.2B_USPTOAndPubMedAbs": 0.195,
 
-    "GPT2_810M_PubMedAbs": 0.168,
-    "GPT2_810M_2.2B_USPTOAndPubMedAbs": 0.195,
+    # "GPT2_810M_PubMedAbs": 0.168,
+    # "GPT2_810M_2.2B_USPTOAndPubMedAbs": 0.195,
 
     "GPT2_1.5B_180M_USPTO": 0.158,
     "GPT2_1.5B_180M_PubMedAbs": 0.168,
@@ -53,27 +53,27 @@ model_family_2_div_coeff = {
 
     "GPT2_345M_2.2B": 0.158,
 
-    "GPT2_810M_2.2B": 0.195,
+    # "GPT2_810M_2.2B": 0.195,
 
     "GPT2_1.5B_180M": 0.158,
 }
 
-model_family_2_likelihoods = {
-    "LLama2": [],
+model_family_2_div_coeff_2_likelihoods = {
+    "LLama2": {0.158: [], 0.168: [], 0.195: []},
 
-    "GPT2_51M_1.31B": [],
+    "GPT2_51M_1.31B": {0.158: [], 0.168: [], 0.195: []},
     
-    "GPT2_51M_557M": [],
+    "GPT2_51M_557M": {0.158: [], 0.168: [], 0.195: []},
 
-    "GPT2_117M_2.2B": [],
+    "GPT2_117M_2.2B": {0.158: [], 0.168: [], 0.195: []},
 
-    "GPT2_204M": [],
+    "GPT2_204M": {0.158: [], 0.168: [], 0.195: []},
 
-    "GPT2_345M_2.2B": [],
+    "GPT2_345M_2.2B": {0.158: [], 0.168: [], 0.195: []},
 
-    "GPT2_810M_2.2B": [],
+    # "GPT2_810M_2.2B": {0.158: [], 0.168: [], 0.195: []},
 
-    "GPT2_1.5B_180M": [],
+    "GPT2_1.5B_180M": {0.158: [], 0.168: [], 0.195: []},
 }
 
 def get_model_name_in_root(root, model_names) -> str:
@@ -102,7 +102,7 @@ for root, dirs, filenames in os.walk(eval_results_path):
                         correct_index = data['doc']['answer']
                         log_likelihood = float(data['filtered_resps'][correct_index][0])
                         div_coeff_2_log_p_v_correct[div_coeff].append(log_likelihood)
-                        model_family_2_likelihoods[model_family_name].append(log_likelihood)
+                        model_family_2_div_coeff_2_likelihoods[model_family_name][div_coeff].append(log_likelihood)
 
 # plot div coeff vs likelihoods
 import matplotlib.pyplot as plt
